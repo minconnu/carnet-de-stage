@@ -1,0 +1,7 @@
+{
+  "name": "Carnet de Stage - Menuiserie",
+  "description": "Une application mobile pour les élèves en menuiserie de l'IND Beauraing pour documenter leurs stages quotidiens avec textes et photos.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

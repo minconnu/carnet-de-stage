@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#b45309">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/shadcn/ui/main/apps/www/public/og.png">
+    <title>Carnet de Stage - Menuiserie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdf8f1;
+            overscroll-behavior-y: contain; /* Empêche le "pull-to-refresh" sur mobile */
+        }
+        @media print {
+            .no-print { display: none !important; }
+        }
+        /* Style pour masquer la barre de défilement mais garder le scroll */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "jspdf": "https://esm.sh/jspdf@^3.0.4",
+    "html2canvas": "https://esm.sh/html2canvas@^1.4.1"
+  }
+}
+</script>
+</head>
+<body>
+    <div id="root"></div>
+    <script>
+        // Enregistrement du Service Worker simplifié pour éviter les erreurs d'URL dans les prévisualisations
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                // Utiliser un chemin relatif simple est plus robuste pour la résolution par le navigateur
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => {
+                        console.log('Service Worker enregistré avec succès:', registration.scope);
+                    })
+                    .catch(error => {
+                        // Note: L'enregistrement peut échouer en environnement de développement/iframe
+                        console.info('Service Worker non enregistré (attendu en prévisualisation):', error.message);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
